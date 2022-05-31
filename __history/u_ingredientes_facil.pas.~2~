@@ -1,0 +1,40 @@
+unit u_ingredientes_facil;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB, Vcl.StdCtrls,
+  Vcl.Mask, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  Tf_ing_facil = class(TForm)
+    q_ing: TFDQuery;
+    ds_ing: TDataSource;
+    q_unidades: TFDQuery;
+    ds_unidades: TDataSource;
+    DBNavigator1: TDBNavigator;
+    DBGrid1: TDBGrid;
+    Edit_descricao: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  f_ing_facil: Tf_ing_facil;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,5 @@
+inherited F_ingredientes_CadPadrao: TF_ingredientes_CadPadrao
+  Caption = 'Cadastro de Ingredientes - Herdado'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

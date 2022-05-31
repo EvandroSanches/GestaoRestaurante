@@ -1,0 +1,44 @@
+unit u_permissoes_CadPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, u_cadastro_padrao, Data.DB,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls;
+
+type
+  TF_Permissoes_CadPadrao = class(Tf_CadPadrao)
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  protected
+    function validar : boolean; override;
+    function pode_excluir : String; override;
+    procedure controle_visual; override;
+    procedure carregar_dados(p:string); override;
+  end;
+
+var
+  F_Permissoes_CadPadrao: TF_Permissoes_CadPadrao;
+
+implementation
+
+{$R *.dfm}
+procedure TF_Permissoes_CadPadrao.carregar_dados(p: string);
+begin
+     q_dados.SQL.Clear;
+     q_dados.SQL.Add(' select * ');
+     q_dados.SQL.Add(' from ' + tabela + ' ');
+     q_dados.SQL.Add(' inner join usuario_permissao on ('+campor_chave+' = usuario_permissao.cod_usuario)');
+     q_dados.SQL.Add(' where ' + campo_pesquisa + ' like ' + QuotedStr('%'+p+'%') +' ');
+     q_dados.SQL.Add(' order by '+campo_pesquisa+'');
+     q_dados.open;
+end;
+
+end.

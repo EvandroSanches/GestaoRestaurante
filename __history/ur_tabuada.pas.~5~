@@ -1,0 +1,61 @@
+unit ur_tabuada;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, QuickRpt, QRCtrls;
+
+type
+  Tr_tabuada = class(TForm)
+    qrp: TQuickRep;
+    DetailBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    PageFooterBand1: TQRBand;
+    l_title: TQRLabel;
+    l_i: TQRLabel;
+    QRLabel2: TQRLabel;
+    l_n: TQRLabel;
+    QRLabel4: TQRLabel;
+    l_r: TQRLabel;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    procedure qrpBeforePrint(Sender: TCustomQuickRep; var PrintReport: Boolean);
+    procedure qrpNeedData(Sender: TObject; var MoreData: Boolean);
+  private
+    i : integer;
+    { Private declarations }
+  public
+    n : integer;
+    { Public declarations }
+  end;
+
+var
+  r_tabuada: Tr_tabuada;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tr_tabuada.qrpBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  i := 1;
+  l_n.Caption := IntToStr(n);
+  l_title.Caption := 'TABUADA DO '+IntToStr(n);
+end;
+
+procedure Tr_tabuada.qrpNeedData(Sender: TObject; var MoreData: Boolean);
+begin
+  MoreData := i <= 10;
+
+  if MoreData then
+  begin
+    l_i.Caption := IntToStr(i);
+    l_r.Caption := IntToStr(i*n);
+    i := i+1;
+  end;
+end;
+
+end.

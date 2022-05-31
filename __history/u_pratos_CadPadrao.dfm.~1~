@@ -1,0 +1,13 @@
+inherited F_pratos_CadPadrao: TF_pratos_CadPadrao
+  Caption = 'Cadastro de Pratos - Hedado'
+  ExplicitWidth = 637
+  ExplicitHeight = 528
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited q_dados: TFDQuery
+    SQL.Strings = (
+      'select *'
+      'from pratos'
+      'order by nome')
+  end
+end

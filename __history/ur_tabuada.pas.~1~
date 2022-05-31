@@ -1,0 +1,24 @@
+unit ur_tabuada;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  Tr_tabuada = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  r_tabuada: Tr_tabuada;
+
+implementation
+
+{$R *.dfm}
+
+end.

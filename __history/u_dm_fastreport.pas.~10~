@@ -1,0 +1,53 @@
+unit u_dm_fastreport;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, frxClass, frxDBSet;
+
+type
+  Tdm_fastreport = class(TDataModule)
+    fastreport_cidades: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    q_cidades: TFDQuery;
+    fastreport_unidades: TfrxReport;
+    frxDBDataset2: TfrxDBDataset;
+    q_unidades: TFDQuery;
+    fastreport_ingredientes: TfrxReport;
+    q_ingredientes: TFDQuery;
+    frxDBDataset3: TfrxDBDataset;
+    fastreport_pratos: TfrxReport;
+    frxDBDataset4: TfrxDBDataset;
+    q_pratos: TFDQuery;
+    q_clientes: TFDQuery;
+    frxDBDataset5: TfrxDBDataset;
+    fastreport_clientes: TfrxReport;
+    q_ingredientescod_ingrediente: TFDAutoIncField;
+    q_ingredientesvalor_unitario: TFloatField;
+    q_ingredientesdescricao: TStringField;
+    q_ingredientesunidade: TStringField;
+    q_pratoscod_prato: TFDAutoIncField;
+    q_pratosnome: TStringField;
+    q_pratosdescricao_detalhada: TMemoField;
+    q_pratosvalor: TFloatField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dm_fastreport: Tdm_fastreport;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+
+
+end.

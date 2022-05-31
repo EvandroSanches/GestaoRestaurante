@@ -1,0 +1,118 @@
+unit ur_composicao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, QRCtrls, Data.DB,
+  FireDAC.Comp.DataSet, QuickRpt, FireDAC.Comp.Client, Vcl.ExtCtrls;
+
+type
+  TR_composicao = class(TForm)
+    QRP: TQuickRep;
+    DetailBand1: TQRBand;
+    PageFooterBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    QRGroup1: TQRGroup;
+    ChildBand1: TQRChildBand;
+    band_footer_group: TQRBand;
+    Q_dados: TFDQuery;
+    Q_dadosprato: TStringField;
+    Q_dadosValor_do_prato: TFloatField;
+    Q_dadosingrediente: TStringField;
+    Q_dadosquantidade: TFloatField;
+    Q_dadosUnidade: TStringField;
+    Q_dadosValor_do_Ingrediente: TFloatField;
+    Q_dadosCusto_do_ingrediente: TFloatField;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    Q_dadoscod_ingrediente: TFDAutoIncField;
+    Q_dadoscod_prato: TFDAutoIncField;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel11: TQRLabel;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRLabel12: TQRLabel;
+    QRSysData2: TQRSysData;
+    procedure QRPBeforePrint(Sender: TCustomQuickRep; var PrintReport: Boolean);
+    procedure DetailBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    cod_prato : string;
+  end;
+
+var
+  R_composicao: TR_composicao;
+  par : boolean;
+
+
+implementation
+
+{$R *.dfm}
+
+procedure TR_composicao.DetailBand1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  if not par then
+  begin
+    DetailBand1.Color := $00E1E1E1;
+  end
+  else
+  begin
+    DetailBand1.Color := clWhite;
+  end;
+
+  par := not par;
+end;
+
+procedure TR_composicao.QRPBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  par := false;
+  Q_dados.sql.Clear;
+  Q_dados.SQL.Add('select	p.nome as prato,');
+  Q_dados.SQL.Add('p.valor as Valor_do_prato,');
+  Q_dados.SQL.Add('i.descricao as ingrediente,');
+  Q_dados.SQL.Add('c.quantidade ,');
+  Q_dados.SQL.Add('u.descricao as Unidade,');
+  Q_dados.SQL.Add('i.cod_ingrediente,');
+  Q_dados.SQL.Add('p.cod_prato,');
+  Q_dados.SQL.Add('i.valor_unitario as Valor_do_Ingrediente,');
+  Q_dados.SQL.Add('c.quantidade * i.valor_unitario as Custo_do_ingrediente');
+  Q_dados.SQL.Add('from	pratos as p');
+  Q_dados.SQL.Add('inner join composicao as c on (p.cod_prato = c.cod_prato)');
+  Q_dados.SQL.Add('inner join ingredientes as i on (i.cod_ingrediente = c.cod_ingrediente)');
+  Q_dados.SQL.Add('inner join unidades as u on (u.cod_unidade = i.cod_unidade)');
+  Q_dados.SQL.Add('order by prato, ingrediente');
+
+  if cod_prato <> '' then
+  begin
+    Q_dados.SQL.Add('where cod_prato = :cod_prato');
+    Q_dados.ParamByName('cod_prato').AsString := cod_prato;
+  end;
+  Q_dados.Open();
+end;
+
+end.

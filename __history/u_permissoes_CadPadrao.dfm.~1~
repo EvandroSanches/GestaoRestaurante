@@ -1,0 +1,7 @@
+inherited F_Permissoes_CadPadrao: TF_Permissoes_CadPadrao
+  Caption = 'Permissoes'
+  ExplicitWidth = 637
+  ExplicitHeight = 528
+  PixelsPerInch = 96
+  TextHeight = 13
+end

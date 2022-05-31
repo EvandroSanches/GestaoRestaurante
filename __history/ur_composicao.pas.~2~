@@ -1,0 +1,76 @@
+unit ur_composicao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, QRCtrls, Data.DB,
+  FireDAC.Comp.DataSet, QuickRpt, FireDAC.Comp.Client, Vcl.ExtCtrls;
+
+type
+  TR_composicao = class(TForm)
+    QRP: TQuickRep;
+    DetailBand1: TQRBand;
+    PageFooterBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    QRGroup1: TQRGroup;
+    ChildBand1: TQRChildBand;
+    band_footer_group: TQRBand;
+    Q_dados: TFDQuery;
+    Q_dadosprato: TStringField;
+    Q_dadosValor_do_prato: TFloatField;
+    Q_dadosingrediente: TStringField;
+    Q_dadosquantidade: TFloatField;
+    Q_dadosUnidade: TStringField;
+    Q_dadosValor_do_Ingrediente: TFloatField;
+    Q_dadosCusto_do_ingrediente: TFloatField;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    Q_dadoscod_ingrediente: TFDAutoIncField;
+    Q_dadoscod_prato: TFDAutoIncField;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel11: TQRLabel;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRLabel12: TQRLabel;
+    QRSysData2: TQRSysData;
+    procedure QRPBeforePrint(Sender: TCustomQuickRep; var PrintReport: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  R_composicao: TR_composicao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TR_composicao.QRPBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  Q_dados.Open();
+end;
+
+end.

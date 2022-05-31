@@ -1,0 +1,5 @@
+inherited f_usuarios_CadPadrao: Tf_usuarios_CadPadrao
+  Caption = 'f_usuarios_CadPadrao'
+  PixelsPerInch = 96
+  TextHeight = 13
+end
